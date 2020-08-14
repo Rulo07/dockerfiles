@@ -1,0 +1,17 @@
+version: '3'
+
+volumes:
+  standalone_data:
+
+services:
+  mongodb24:
+    container_name: mongodb24
+    hostname: mongodb24
+    image: mongo:2.4
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - standalone_data:/data/db
+    ports:
+        - 27017:27017

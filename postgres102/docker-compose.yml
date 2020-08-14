@@ -1,0 +1,21 @@
+version: '3'
+
+volumes:
+  standalone_data:
+
+services:
+  postgres:
+    container_name: postgres102
+    hostname: postgres102
+    image: postgres:10.2
+    ports:
+      - "5432:5432"
+    volumes:
+      - standalone_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: dellanera
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

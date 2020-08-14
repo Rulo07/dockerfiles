@@ -1,0 +1,38 @@
+version: '2'
+
+volumes:
+  data:
+services:
+  intranet:
+    hostname: intranet
+    build:
+      context: .
+    image: eu.gcr.io/talento-corporativo-gcp/ruby23:latest
+    restart: always
+    ports:
+      - 80:80
+      - 3000:3000
+    volumes:
+      - ./:/var/ruby/app
+    environment:
+      db_host: mysql
+      db_name: intranet_development
+      db_user: root
+      db_pass: dellanera
+      db_adapter: mysql
+      PASSENGER_APP_ENV: development
+      VIRTUAL_HOST: "http://rubytest.local"
+  mysql:
+    hostname: mysql55
+    image: mysql:5.5
+    ports:
+      - "3306:3306"
+    volumes:
+      - data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: dellanera
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080

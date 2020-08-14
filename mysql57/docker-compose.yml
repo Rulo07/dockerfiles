@@ -1,0 +1,22 @@
+version: '3'
+
+volumes:
+  standalone_data:
+
+services:
+  mysql:
+    container_name: mysql57
+    hostname: mysql57
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - standalone_data:/var/lib/mysql
+      - /Users/raul/Documents/bbdd:/mnt
+    environment:
+      MYSQL_ROOT_PASSWORD: dellanera
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
